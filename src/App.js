@@ -1,7 +1,7 @@
 import React from "react";
 import {Navbar} from "./common/navbar";
 import {Route, Switch} from 'react-router-dom';
-import {MemOverview} from "./mem/MemOverview";
+import MemOverview from "./mem/MemOverview";
 
 class App extends React.Component {
   render() {

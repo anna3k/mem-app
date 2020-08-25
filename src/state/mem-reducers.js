@@ -1,10 +1,11 @@
 import {ADD_MEM_SUCCESS, FIND_MEMS_SUCCESS, UPDATE_MEM_SUCCESS} from "./mem-actions";
 
-const STATE = {
+export const STATE = {
   mems: []
 }
 
 export const memReducer = (state = STATE, action) => {
+  console.log('state from reducer: ', state)
   switch (action.type) {
     case FIND_MEMS_SUCCESS:
       return {

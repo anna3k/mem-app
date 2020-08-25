@@ -32,5 +32,8 @@ export function updateMem(mem) {
 
 export function findAllMems() {
   return (dispatch) => findAllMemsEffect()
-    .then(response => dispatch(findMemsSuccess(response)));
+    .then(response => {
+      dispatch(findMemsSuccess(response))
+      console.log(response)
+    });
 }
