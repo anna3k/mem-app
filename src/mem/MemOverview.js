@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Mem} from "./Mem";
-import {connect, useDispatch} from "react-redux";
+import Mem from "./Mem";
+import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {findAllMems, updateMem} from "../state/mem-actions";
+import {findAllMems} from "../state/mem-actions";
 
 const MemOverview = (props) => {
 
   const [isUpdated] = useState();
-    useEffect(() => {
-      props.findAllMems()
-    }, [isUpdated]);
+  useEffect(() => {
+    props.findAllMems()
+  }, [isUpdated]);
 
   return <div className="d-flex p-4 w-100 flex-wrap align-content-stretch">
     {props.mems.map(mem =>
@@ -20,17 +20,15 @@ const MemOverview = (props) => {
   </div>
 }
 
-const mapStateToProps = (state) => {
-  console.log('map state to props', state)
+const mapStateToProps = (state, ownProps) => {
   return {
-    mems: state.mems,
+    mems: state[ownProps.memType],
   };
 };
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
       findAllMems,
-      updateMem,
     },
     dispatch
   );

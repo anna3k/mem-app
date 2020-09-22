@@ -1,7 +1,8 @@
 import React from "react";
 import {Navbar} from "./common/navbar";
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import MemOverview from "./mem/MemOverview";
+import {HOT_MEM, REGULAR_MEM} from "./mem/mem-type";
 
 class App extends React.Component {
   render() {
@@ -10,38 +11,17 @@ class App extends React.Component {
         <Navbar/>
         <main>
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/regular"/>
+            </Route>
             <Route path="/hot">
-              <MemOverview/>
+              <MemOverview memType={HOT_MEM}/>
             </Route>
             <Route path="/regular">
-              <MemOverview/>
+              <MemOverview memType={REGULAR_MEM}/>
             </Route>
           </Switch>
         </main>
-
-        {/*<Router>*/}
-        {/*  <Switch>*/}
-        {/*    <Route exact path="/">*/}
-        {/*      <Redirect to="/regular" />*/}
-        {/*    </Route>*/}
-        {/*    <Route exact path="/regular">*/}
-        {/*      <MemsList />*/}
-        {/*    </Route>*/}
-        {/*    <Route exact path="/hot">*/}
-        {/*      <MemsList />*/}
-        {/*    </Route>*/}
-        {/*    <Route exact path="/addMem">*/}
-        {/*      <Leyout>*/}
-        {/*        <Paper>*/}
-        {/*          <AddMem />*/}
-        {/*        </Paper>*/}
-        {/*      </Leyout>*/}
-        {/*    </Route>*/}
-        {/*    <Route path="*">*/}
-        {/*      <Page404 />*/}
-        {/*    </Route>*/}
-        {/*  </Switch>*/}
-        {/*</Router>*/}
       </div>
     );
   }

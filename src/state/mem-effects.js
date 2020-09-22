@@ -7,7 +7,7 @@ export function findAllMemsEffect() {
 export function createMemEffect(mem) {
   return fetch(url, {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {"content-type": "application/json"},
     body: JSON.stringify(mem),
   })
     .then(handleResponse)
@@ -17,7 +17,7 @@ export function createMemEffect(mem) {
 export function updateMemEffect(mem) {
   return fetch(url + mem.id, {
     method: "PUT",
-    headers: { "content-type": "application/json" },
+    headers: {"content-type": "application/json"},
     body: JSON.stringify(mem),
   })
     .then(handleResponse)

@@ -1,23 +1,17 @@
 import {ADD_MEM_SUCCESS, FIND_MEMS_SUCCESS, UPDATE_MEM_SUCCESS} from "./mem-actions";
+import {HOT_MEM, REGULAR_MEM} from "../mem/mem-type";
 
 export const STATE = {
-  mems: []
+  [HOT_MEM]: [],
+  [REGULAR_MEM]: []
 }
 
 export const memReducer = (state = STATE, action) => {
-  console.log('state from reducer: ', state)
   switch (action.type) {
     case FIND_MEMS_SUCCESS:
-      return {
-        ...state,
-        mems: action.payload
-      };
+      return mapFindMemToState(action.payload, state)
     case UPDATE_MEM_SUCCESS:
-      const updatedMems = state.mems.map(mem => mem.id === action.payload ? action.payload : mem);
-      return {
-        ...state,
-        mems: updatedMems
-      };
+      return mapUpdateMemToState(action.payload, state)
     case ADD_MEM_SUCCESS:
       return {
         ...state,
@@ -26,4 +20,42 @@ export const memReducer = (state = STATE, action) => {
     default:
       return state;
   }
+}
+
+const mapFindMemToState = (mems, state) => {
+  const {hotMems, regularMems} = categorizeMems(mems)
+  return {
+    ...state,
+    hotMems: hotMems,
+    regularMems: regularMems
+  }
+}
+
+const mapUpdateMemToState = (updatedMem, state) => {
+  const mems = [...state.hotMems, ...state.regularMems].map(mem => mem.id === updatedMem.id ? updatedMem : mem);
+  const {hotMems, regularMems} = categorizeMems(mems);
+  return {
+    ...state,
+    hotMems: hotMems,
+    regularMems: regularMems
+  }
+}
+
+const categorizeMems = (mems) => {
+  const hotMems = [], regularMems = [];
+  mems.forEach(mem => {
+    switch (getMemType(mem)) {
+      case HOT_MEM:
+        hotMems.push(mem);
+        break;
+      case REGULAR_MEM:
+        regularMems.push(mem);
+        break;
+    }
+  });
+  return {hotMems, regularMems};
+}
+
+const getMemType = ({upvotes, downvotes}) => {
+  return upvotes - downvotes > 5 ? HOT_MEM : REGULAR_MEM
 }

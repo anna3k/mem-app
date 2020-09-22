@@ -1,15 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 export const Navbar = () => {
-  return  <nav className="navbar navbar-expand-md navbar-light bg-light">
+  return <nav className="navbar navbar-expand-md navbar-light bg-light">
     <div className="navbar-light" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link" to="/regular">REGULAR</Link>
+          <NavLink className="nav-link" activeClassName="active" to="/regular">REGULAR</NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/hot">HOT</Link>
+          <NavLink className="nav-link" activeClassName="active" to="/hot">HOT</NavLink>
         </li>
       </ul>
     </div>
