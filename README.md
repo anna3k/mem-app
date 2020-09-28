@@ -1,4 +1,3 @@
-# Mem-app
 How to run the app?
 
 *npm install
